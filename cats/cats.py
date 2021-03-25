@@ -2,11 +2,16 @@ from tkinter import *
 #click function
 def click():
     entered_text = textentry.get()
+    dropdown_text = clicked.get()
     entered_text = entered_text.replace(" ","")
     entered_text = entered_text.lower()
     output.delete(0.0, END)
-    if entered_text in cats:
+    if dropdown_text in cats and entered_text in cats and dropdown_text != entered_text:
+        definition = "Please only choose one cat breed at a time."
+    elif entered_text in cats:
         definition = cats[entered_text]
+    elif dropdown_text in cats:
+        definition = cats[dropdown_text]
     else:
         definition = "Sorry, we don't have that cat breed in our database!"
     output.insert(END, definition)
@@ -14,28 +19,6 @@ def click():
 def close_window():
     window.destroy()
     exit()
-#configure window
-window = Tk()
-window.iconbitmap("suscat.ico")
-window.title("Cats")
-window.configure(background = "black")
-window.resizable(0, 0)
-#add cat photo
-cat1 = PhotoImage(file = "cat.gif")
-Label(window, image = cat1, bg = "black").grid(row = 0, column = 0, sticky = E)
-#create label
-Label(window, text = "Enter a type of cat.", bg = "black", fg = "white", font = "none 12 bold").grid(row = 1, column = 0, sticky = W)
-#text entry
-textentry = Entry(window, width = 20, bg = "white")
-textentry.grid(row = 2, column = 0, sticky = W)
-#submit button
-Label(window, text = "\n", bg = "black", fg = "white", font = "none 12 bold").grid(row = 3, column = 0, sticky = W)
-Button(window, text = "Submit", width = 6, command = click).grid(row = 3, column = 0, sticky = W)
-#create another label
-Label(window, text = "\nCat facts:", bg = "black", fg = "white", font = "none 12 bold").grid(row = 4, column = 0, sticky = W)
-#create a text box
-output = Text(window, width = 75, height = 6, wrap = WORD, background = "white")
-output.grid(row = 5, column = 0, columnspan = 2, sticky = W)
 #dictionary
 cats = {
     "abyssinian": "Abyssinians are highly intelligent and intensely inquisitive. They love to investigate and will leave no nook or cranny unexplored. They’re sometimes referred to as “Aby-grabbys” because they tend to take things that grab their interest. The playful Aby loves to jump and climb. Keep a variety of toys on hand to keep her occupied, including puzzle toys that challenge her intelligence.",
@@ -50,7 +33,7 @@ cats = {
     "americanwirehair": "Intelligent and highly adaptable, the American Wirehair is an American original, with a completely unique wired coat.",
     "balinesejavanese": "The Balinese, also known as Javanese depending on coat color and pattern, is regal and aristocratic in appearance, but a curious kitten at heart.",
     "bengal": "Bengal Cats are curious and confident with the tameness of a domestic tabby and the beauty of an Asian Leopard Cat. Learn more about Bengals and their playful personality, plus information on their health and how to feed them.",
-    "birman": "The Birman is a cat of distinction as well as legend. With their exotic ancestry, luxurious pointed coats, “white gloved” paws and mesmerizing blue eyes, this is a breed with undeniable charisma.",
+    "birman": "The Birman is a cat of distinction as well as legend. With their exotic ancestry, luxurious pointed coats, “#f1f7f9 gloved” paws and mesmerizing blue eyes, this is a breed with undeniable charisma.",
     "bombay": "The Bombay is an easy-going, yet energetic cat. She does well in quiet apartments where she’s the center of attention as well as in lively homes with children and other pets. She’ll talk to you in a distinct voice, and you’re likely to find her in the warmest spot in your home, whether that’s in the sunlight from a window or curled up under the covers in bed with you.",
     "britishshorthair": "The British Shorthair is an easygoing feline. She enjoys affection but isn’t needy and dislikes being carried. She’ll follow you from room to room, though, out of curiosity. British Shorthairs aren’t lap cats, but they do enjoy snuggling next to their people on the couch.",
     "cornishrex": "Bat-eared, big-eyed and wavy-coated, the Cornish Rex has a distinctive look and exceptionally silky coat due to not having guard hairs like other breeds. This active cat has a small, whippetlike body and loves to climb, leap and sprint. With kittenlike antics that last a lifetime, this feline likes to be where the action is. The Cornish Rex is perfect for those who want a cat to participate in their family life.",
@@ -69,10 +52,39 @@ cats = {
     "toyger": "With her beautiful bold stripes and powerful body, the Toyger looks like a jungle tiger. This breed has a friendly, outgoing temperament and delights in being with people, even strangers, and gets along well with other pets. Highly intelligent, the Toyger is easy to train to go on leash walks and to play fetch. The Toyger is generally robust and healthy.",
     "ragamuffin": "A gorgeous, massive breed with large, expressive eyes, the RagaMuffin is sweet and loving, often described as being like a teddy bear. This feline thrives on attention and is a wonderful family pet that gets along well with other cats and cat friendly dogs. The RagaMuffin has an easygoing, calm temperament and can be trained to walk on a leash, play fetch and sit up to beg. This healthy breed reaches adulthood at 4 years old."
 }
+#configure window
+window = Tk()
+window.iconbitmap("suscat.ico")
+window.title("Cats")
+window.configure(background = "#161513", padx = "5", pady = "5")
+window.resizable(0, 0)
+#add cat photo
+cat1 = PhotoImage(file = "cat.gif")
+Label(window, image = cat1, bg = "#161513").grid(row = 0, column = 0, sticky = W)
+#create label
+Label(window, text = "Use the dropdown menu or text entry to enter a type of cat.", bg = "#161513", fg = "#f1f7f9", font = "none 12 bold").grid(row = 1, column = 0, sticky = W)
+#dropdown
+clicked = StringVar()
+clicked.set("Cats")
+drop = OptionMenu(window, clicked, *cats)
+drop.configure(relief = "flat", bg = "#f1f7f9", fg = "#161513", borderwidth = "0", activebackground = "#f1f7f9", activeforeground = "#161513")
+drop.grid(row = 2, column = 0, sticky = W)
+#text entry
+Label(window, text = "\n", bg = "#161513", fg = "#f1f7f9", font = "none 6 bold").grid(row = 3, column = 0, sticky = W)
+textentry = Entry(window, width = 20, bg = "#f1f7f9")
+textentry.grid(row = 3, column = 0, sticky = W)
+#submit button
+Label(window, text = "\n", bg = "#161513", fg = "#f1f7f9", font = "none 12 bold").grid(row = 4, column = 0, sticky = W)
+Button(window, text = "Submit", width = 6, command = click, relief = "flat", bg = "#fcd757", fg = "#161513", borderwidth = "0", activebackground = "#fcd757", activeforeground = "#161513").grid(row = 4, column = 0, sticky = W)
+#create another label
+Label(window, text = "Cat facts:", bg = "#161513", fg = "#f1f7f9", font = "none 12 bold").grid(row = 5, column = 0, sticky = W)
+#create a text box
+output = Text(window, width = 75, height = 6, wrap = WORD, background = "#f1f7f9")
+output.grid(row = 6, column = 0, columnspan = 2, sticky = W)
 #citation
-Label(window, text = "\nDefinitions courtesy of Purina.", bg = "black", fg = "white", font = "none 10 bold").grid(row = 7, column = 0, sticky = W)
+Label(window, text = "\nDefinitions courtesy of Purina.", bg = "#161513", fg = "#f1f7f9", font = "none 10 bold").grid(row = 8, column = 0, sticky = W)
 #exit
-Label(window, text = "\n", bg = "black", fg = "white", font = "none 12 bold").grid(row = 8, column = 0, sticky = W)
-Button(window, text = "Exit", width = 14, command = close_window).grid(row = 8, column = 0, sticky = W)
+Label(window, text = "\n", bg = "#161513", fg = "#f1f7f9", font = "none 10 bold").grid(row = 9, column = 0, sticky = W)
+Button(window, text = "Exit", width = 14, command = close_window, relief = "flat", bg = "#fc7a57", fg = "#161513", borderwidth = "0", activebackground = "#fc7a57", activeforeground = "#161513").grid(row = 9, column = 0, sticky = W)
 #initialize window
 window.mainloop()
