@@ -74,17 +74,19 @@ Label(window, text = "\n", bg = "#161513", fg = "#f1f7f9", font = "none 6 bold")
 textentry = Entry(window, width = 20, bg = "#f1f7f9")
 textentry.grid(row = 3, column = 0, sticky = W)
 #submit button
-Label(window, text = "\n", bg = "#161513", fg = "#f1f7f9", font = "none 12 bold").grid(row = 4, column = 0, sticky = W)
+Label(window, text = "\n", bg = "#161513", fg = "#f1f7f9", font = "none 6 bold").grid(row = 4, column = 0, sticky = W)
 Button(window, text = "Submit", width = 6, command = click, relief = "flat", bg = "#fcd757", fg = "#161513", borderwidth = "0", activebackground = "#fcd757", activeforeground = "#161513").grid(row = 4, column = 0, sticky = W)
 #create another label
+Label(window, text = "\n", bg = "#161513", fg = "#f1f7f9", font = "none 10 bold").grid(row = 5, column = 0, sticky = W)
 Label(window, text = "Cat facts:", bg = "#161513", fg = "#f1f7f9", font = "none 12 bold").grid(row = 5, column = 0, sticky = W)
 #create a text box
 output = Text(window, width = 75, height = 6, wrap = WORD, background = "#f1f7f9")
 output.grid(row = 6, column = 0, columnspan = 2, sticky = W)
 #citation
-Label(window, text = "\nDefinitions courtesy of Purina.", bg = "#161513", fg = "#f1f7f9", font = "none 10 bold").grid(row = 8, column = 0, sticky = W)
+Label(window, text = "\n", bg = "#161513", fg = "#f1f7f9", font = "none 6 bold").grid(row = 8, column = 0, sticky = W)
+Label(window, text = "Definitions courtesy of Purina.", bg = "#161513", fg = "#f1f7f9", font = "none 10 bold").grid(row = 8, column = 0, sticky = W)
 #exit
-Label(window, text = "\n", bg = "#161513", fg = "#f1f7f9", font = "none 10 bold").grid(row = 9, column = 0, sticky = W)
-Button(window, text = "Exit", width = 14, command = close_window, relief = "flat", bg = "#fc7a57", fg = "#161513", borderwidth = "0", activebackground = "#fc7a57", activeforeground = "#161513").grid(row = 9, column = 0, sticky = W)
+Label(window, text = "\n", bg = "#161513", fg = "#f1f7f9", font = "none 6 bold").grid(row = 9, column = 0, sticky = W)
+Button(window, text = "Quit", width = 6, command = close_window, relief = "flat", bg = "#fc7a57", fg = "#161513", borderwidth = "0", activebackground = "#fc7a57", activeforeground = "#161513").grid(row = 9, column = 0, sticky = W)
 #initialize window
 window.mainloop()
